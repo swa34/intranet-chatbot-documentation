@@ -1,5 +1,11 @@
 <!-- _sidebar.md -->
 
+<div class="notebooklm-banner">
+  <p><strong>AI-Powered Search</strong></p>
+  <p>Interact with these docs using AI-powered insights and intelligent search</p>
+  <a href="https://notebooklm.google.com/notebook/0a7489c0-3834-4aaf-9f36-68ef3e567699" target="_blank">Open in Google NotebookLM →</a>
+</div>
+
 * [Home](documentation/README.md)
 
 * **Getting Started**

@@ -36,6 +36,35 @@
       color: var(--theme-color);
       font-size: 1.1em;
     }
+
+    /* NotebookLM banner styling */
+    .notebooklm-banner {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .notebooklm-banner a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-bottom: 2px solid rgba(255,255,255,0.5);
+      transition: border-color 0.3s;
+    }
+
+    .notebooklm-banner a:hover {
+      border-bottom-color: white;
+    }
+
+    .notebooklm-banner p {
+      margin: 8px 0;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
@@ -46,11 +75,9 @@
       name: 'Intranet Chatbot Docs',
       repo: '',  // Add your GitHub repo URL here if you want a GitHub corner link
       loadSidebar: true,
-      coverpage: true,
-      onlyCover: false,
       subMaxLevel: 3,
       auto2top: true,
-      homepage: 'documentation/README.md',
+      homepage: 'documentation/guides/QUICK_START.md',
 
       // Search plugin configuration
       search: {
