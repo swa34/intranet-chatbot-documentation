@@ -1,9 +1,8 @@
 # Authentication System Setup Guide
 
-## Overviews
+## Overview
 
 Your UGA CAES Intranet Chatbot now has a complete user authentication system with:
-
 - ✅ User signup with @uga.edu email validation
 - ✅ Secure login with bcrypt password hashing
 - ✅ Session management using Redis (fast & scalable)
@@ -13,10 +12,9 @@ Your UGA CAES Intranet Chatbot now has a complete user authentication system wit
 - ✅ Rate limiting on login attempts (security)
 - ✅ Beautiful, responsive signup & login pages
 
-## Database Schemas
+## Database Schema
 
 ### Users Table
-
 ```sql
 - id (primary key)
 - email (unique, must be @uga.edu)
@@ -31,7 +29,6 @@ Your UGA CAES Intranet Chatbot now has a complete user authentication system wit
 ```
 
 ### Sessions
-
 - Stored in **Redis** for blazing fast lookups
 - 24-hour expiration (auto-cleanup)
 - Token-based authentication
@@ -58,7 +55,6 @@ public/
 ## API Endpoints
 
 ### Authentication
-
 - `POST /api/auth/signup` - Register new user
 - `POST /api/auth/login` - Login user
 - `POST /api/auth/logout` - Logout user
@@ -68,7 +64,6 @@ public/
 ### Request/Response Examples
 
 **Signup:**
-
 ```javascript
 POST /api/auth/signup
 {
@@ -88,7 +83,6 @@ Response: 201 Created
 ```
 
 **Login:**
-
 ```javascript
 POST /api/auth/login
 {
@@ -107,13 +101,11 @@ Response: 200 OK
 ## How to Use
 
 ### 1. Start the Server
-
 ```bash
 npm start
 ```
 
 ### 2. Access the Application
-
 - **Signup:** http://localhost:3000/auth/signup.html
 - **Login:** http://localhost:3000/auth/login.html
 - **Chatbot:** http://localhost:3000 (requires login)
@@ -121,17 +113,14 @@ npm start
 ### 3. Create Your First Admin User
 
 **Option A: Via Signup Page**
-
 1. Go to `/auth/signup.html`
 2. Register with your @uga.edu email
 3. Manually update role in database:
-
 ```sql
 UPDATE users SET role = 'admin' WHERE email = 'your.email@uga.edu';
 ```
 
 **Option B: Direct Database Insert**
-
 ```javascript
 // Run this in psql or a database tool
 const bcrypt = require('bcrypt');
@@ -144,13 +133,11 @@ VALUES ('admin@uga.edu', 'Admin', 'User', '<hash>', 'admin', 10);
 ## User Roles
 
 ### Tester (Default)
-
 - Access chatbot
 - Provide feedback
 - View own conversation history
 
 ### Admin
-
 - All tester permissions
 - Access admin panel (`/admin/*`)
 - View analytics & metrics
@@ -160,24 +147,20 @@ VALUES ('admin@uga.edu', 'Admin', 'User', '<hash>', 'admin', 10);
 ## Security Features
 
 ### Password Requirements
-
 - Minimum 8 characters
 - At least one uppercase letter
 - At least one lowercase letter
 - At least one number
 
 ### Email Validation
-
 - Must be @uga.edu domain
 - Validated on both frontend and backend
 
 ### Rate Limiting
-
 - Max 5 failed login attempts per 15 minutes
 - Prevents brute force attacks
 
 ### Session Security
-
 - HttpOnly cookies (prevents XSS)
 - Secure flag in production (HTTPS only)
 - SameSite protection (CSRF prevention)
@@ -186,7 +169,6 @@ VALUES ('admin@uga.edu', 'Admin', 'User', '<hash>', 'admin', 10);
 ## Environment Variables
 
 Ensure these are set in your `.env`:
-
 ```bash
 # Database (already configured)
 DB_HOST=your-host
@@ -207,7 +189,6 @@ PINECONE_API_KEY=your-key
 ## Migration Commands
 
 Run database migrations:
-
 ```bash
 npm run migrate:auth
 ```
@@ -217,7 +198,6 @@ npm run migrate:auth
 The old basic HTTP auth is still available. To switch:
 
 **In `server.js` line 90:**
-
 ```javascript
 // New session-based auth (current)
 app.use(sessionAuthMiddleware);
@@ -246,33 +226,26 @@ app.use(authMiddleware);
 ## Next Steps
 
 ### 1. Create Your First Admin
-
 Update the first user to admin role (see above)
 
 ### 2. Customize Roles
-
 You can add more roles in the future:
-
 - Modify `authUtils.js` `validateRole()` function
 - Update database constraint
 - Add middleware checks
 
 ### 3. Add Password Reset
-
 Future enhancement to add "Forgot Password" functionality
 
 ### 4. Email Verification
-
 Optional: Add email verification on signup
 
 ### 5. Two-Factor Authentication
-
 Optional: Add 2FA for enhanced security
 
 ## Troubleshooting
 
 ### Redis Connection Issues
-
 ```bash
 # Check if Redis is running
 redis-cli ping
@@ -282,20 +255,17 @@ redis-cli ping
 ```
 
 ### Database Connection Issues
-
 ```bash
 # Test PostgreSQL connection
 psql -h $DB_HOST -U $DB_USERNAME -d $DB_DATABASE
 ```
 
 ### Session Not Persisting
-
 - Check browser cookies (should see `session_token`)
 - Verify Redis is running
 - Check console for errors
 
 ### Migration Errors
-
 ```bash
 # If migration fails, check:
 # 1. Database connection
@@ -329,7 +299,6 @@ psql -h $DB_HOST -U $DB_USERNAME -d $DB_DATABASE
 ## Support
 
 For issues or questions:
-
 1. Check this documentation
 2. Review code comments in auth files
 3. Check server logs for error messages
